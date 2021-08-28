@@ -90,7 +90,7 @@ export default class ImageViewer extends Component{
         failedUrl: PropTypes.string
     };
 
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
 
         this.imagePanResponder = PanResponder.create({
             onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -220,7 +220,8 @@ export default class ImageViewer extends Component{
 
                             Animated.timing(imageInfo.scalable,{
                                 toValue: this.imgScale,
-                                duration: 300
+                                duration: 300,
+                                useNativeDriver: true,
                             }).start(() => {
                                 this.horizontalWholeCounter = 0;
                                 this.maxOffsetX = 0;
@@ -247,12 +248,14 @@ export default class ImageViewer extends Component{
                                 Animated.timing(this.state.fadeAnim, {
                                     toValue: 0,
                                     duration: 200,
-                                    easing: Easing.linear
+                                    easing: Easing.linear,
+                                    useNativeDriver: true,
                                 }),
                                 Animated.timing(this.state.scalable,{
                                     toValue: 0,
                                     duration: 200,
-                                    easing: Easing.linear
+                                    easing: Easing.linear,
+                                    useNativeDriver: true,
                                 })
                             ]).start(()=>{
                                 this.setState({
@@ -298,7 +301,7 @@ export default class ImageViewer extends Component{
         }
     }
 
-    componentWillReceiveProps(nextProps){
+    UNSAFE_componentWillReceiveProps(nextProps){
 
         if(nextProps.shown){
             //initial state data
@@ -364,13 +367,13 @@ export default class ImageViewer extends Component{
                     return (
                         <View style={viewer.failedImg} key={index}>
                             {
-                                this.props.failedUrl ? 
+                                this.props.failedUrl ?
                                     <Image
                                         style={viewer.failedImg}
-                                        source={{uri: this.props.failedUrl}}/> : 
+                                        source={{uri: this.props.failedUrl}}/> :
                                     <Image
                                         style={viewer.failedImg}
-                                        source={require('./img-error.jpg')}/>    
+                                        source={require('./img-error.jpg')}/>
                             }
                         </View>
                     );
@@ -389,12 +392,14 @@ export default class ImageViewer extends Component{
             Animated.timing(this.state.fadeAnim, {
                 toValue: 0,
                 duration: 200,
-                easing: Easing.linear
+                easing: Easing.linear,
+                useNativeDriver: true,
             }),
             Animated.timing(this.state.scalable,{
                 toValue: 0,
                 duration: 200,
-                easing: Easing.linear
+                easing: Easing.linear,
+                useNativeDriver: true,
             })
         ]).start(()=>{
             this.setState({
@@ -525,12 +530,14 @@ export default class ImageViewer extends Component{
                 Animated.timing(this.state.fadeAnim, {
                     toValue: 1,
                     duration: 200,
-                    easing: Easing.linear
+                    easing: Easing.linear,
+                    useNativeDriver: true,
                 }),
                 Animated.timing(this.state.scalable,{
                     toValue: 1,
                     duration: 200,
-                    easing: Easing.linear
+                    easing: Easing.linear,
+                    useNativeDriver: true,
                 })
             ]).start(() => {
                 this.imgScale = 1;
