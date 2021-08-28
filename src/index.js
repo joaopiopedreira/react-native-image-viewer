@@ -317,7 +317,7 @@ export default class ImageViewer extends Component{
 
         const ImageLists = imageUrls.map((imageUrl,index) => {
 
-            const imageInfo = this.state.imagesInfo[index];
+            const imageInfo = this.state.imagesInfo[index] || {};
 
             let width = imageInfo && imageInfo.width;
             let height = imageInfo && imageInfo.height;
@@ -573,7 +573,7 @@ export default class ImageViewer extends Component{
             return;
         }
 
-        const imageInfo = Object.assign({},this.state.imagesInfo[index]);
+        const imageInfo = Object.assign({},this.state.imagesInfo[index]) || {};
         const prefetchImagePromise = Image.prefetch(imageInfo.url);
 
         prefetchImagePromise.then(() => {
